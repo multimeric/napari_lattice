@@ -385,6 +385,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -526,6 +535,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -581,6 +599,20 @@ Refer to: <a href="https://xarray.pydata.org/.">https://xarray.pydata.org/.</a><
 To install the testing dependencies, use <code>pip install -e 'core[testing]' -e 'plugin[testing]'</code>
 Since there are two separate packages, you will have to specify the location of each test directory.
 To run all the tests, use <code>pytest core/tests/ plugin/tests</code> from the root directory.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Docs are built with <a href="https://www.mkdocs.org/">mkdocs</a>.</p>
+<p>To modify the docs, you need the docs dependencies, so clone the repo and then:</p>
+<pre><code class="language-bash">pip install -e 'core[docs]'
+</code></pre>
+<p>The key files are:</p>
+<pre><code>* `mkdocs.yml`, which is the main config file for mkdocs, and
+* `docs/` which is a directory containing markdown files. Each new file that gets added there will create a new page in the website.
+</code></pre>
+<p>Some useful <code>mkdocs</code> commands:</p>
+<ul>
+<li><code>mkdocs serve</code> runs the development server which hosts the docs on a local web server. Any changes to your markdown files will be reflected in this server, although you sometimes have to restart the server if you make a change to configuration</li>
+<li><code>mkdocs gh-deploy</code> builds the docs, and pushes them to GitHub Pages. This updates the docs at <a href="https://bioimageanalysiscorewehi.github.io/napari_lattice/">https://bioimageanalysiscorewehi.github.io/napari_lattice/</a>.</li>
+</ul>
 
 
 
