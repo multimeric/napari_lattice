@@ -296,6 +296,26 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -332,108 +352,108 @@
 <h1 id="command-line-interface">Command Line Interface</h1>
 <h1 id="lls-pipeline">lls-pipeline</h1>
 <p><strong>Usage:</strong></p>
-<pre><code class="language-text">lls-pipeline [OPTIONS] [INPUT_IMAGE]
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lls-pipeline [OPTIONS] [INPUT_IMAGE]
+</code></pre></div>
 <p><strong>Options:</strong></p>
-<pre><code class="language-text">  [INPUT_IMAGE]                   Path to the image file to read, in a format
-                                  readable by AICSImageIO, for example .tiff
-                                  or .czi
-  --skew [X|Y]                    Axis along which to deskew the image.
-                                  Choices: `{&quot;X&quot;, &quot;Y&quot;}`. These can be provided
-                                  as `str`.   [default: Y]
-  --angle FLOAT                   Angle of deskewing, in degrees, as a float.
-                                  [default: 30.0]
-  --pixel-sizes &lt;FLOAT FLOAT FLOAT&gt;...
-                                  Pixel size of the microscope, in microns.
-                                  This can alternatively be provided as a
-                                  `tuple[float]` of `(Z, Y, X)` This takes
-                                  three arguments, corresponding to the Z, Y
-                                  and X pixel dimensions respectively
-                                  [default: 0.3, 0.1499219272808386,
-                                  0.1499219272808386]
-  --rois PATH                     A list of paths pointing to regions of
-                                  interest to crop to, in ImageJ format.
-  --roi-indices INTEGER           A subset of all the ROIs to process. Each
-                                  array item should be an index into the ROI
-                                  list indicating an ROI to include. This
-                                  allows you to process only a subset of the
-                                  regions from a ROI file specified using the
-                                  `roi_list` parameter. If `None`, it is
-                                  assumed that you want to process all ROIs.
-  --z-start INTEGER               The index of the first Z slice to use. All
-                                  prior Z slices will be discarded.
-  --z-end INTEGER                 The index of the last Z slice to use. The
-                                  selected index and all subsequent Z slices
-                                  will be discarded. Defaults to the last z
-                                  index of the image.
-  --deconvolution / --disable-deconvolution
-                                  [default: disable-deconvolution]
-  --decon-processing [cuda_gpu|opencl_gpu|cpu]
-                                  Hardware to use to perform the
-                                  deconvolution. Choices: `{&quot;cuda_gpu&quot;,
-                                  &quot;opencl_gpu&quot;, &quot;cpu&quot;}`. Can be provided as
-                                  `str`.   [default: cpu]
-  --psf PATH                      One or more paths pointing to point spread
-                                  functions to use for deconvolution. Each
-                                  file should in a standard image format
-                                  (.czi, .tiff etc), containing a 3D image
-                                  array. This option can be used multiple
-                                  times to provide multiple PSF files.
-  --psf-num-iter INTEGER          Number of iterations to perform in
-                                  deconvolution   [default: 10]
-  --background TEXT               Background value to subtract for
-                                  deconvolution. Only used when
-                                  `decon_processing` is set to `GPU`. This can
-                                  either be a literal number, &quot;auto&quot; which
-                                  uses the median of the last slice, or
-                                  &quot;second_last&quot; which uses the median of the
-                                  last slice.   [default: 0]
-  --time-start INTEGER            Index of the first time slice to use
-                                  (inclusive). Defaults to the first time
-                                  index of the image.  [default: 0]
-  --time-end INTEGER              Index of the first time slice to use
-                                  (exclusive). Defaults to the last time index
-                                  of the image.
-  --channel-start INTEGER         Index of the first channel slice to use
-                                  (inclusive). Defaults to the first channel
-                                  index of the image.  [default: 0]
-  --channel-end INTEGER           Index of the first channel slice to use
-                                  (exclusive). Defaults to the last channel
-                                  index of the image.
-  --save-dir PATH                 The directory where the output data will be
-                                  saved. This can be specified as a `str` or
-                                  `Path`.
-  --save-name TEXT                The filename that will be used for output
-                                  files. This should not contain a leading
-                                  directory or file extension. The final
-                                  output files will have additional elements
-                                  added to the end of this prefix to indicate
-                                  the region of interest, channel, timepoint,
-                                  file extension etc.
-  --save-type [h5|tiff]           The data type to save the result as. This
-                                  will also be used to determine the file
-                                  extension of the output files. Choices:
-                                  `{&quot;h5&quot;, &quot;tiff&quot;}`. Choices can alternatively
-                                  be specifed as `str`, for example `'tiff'`.
-                                  [default: h5]
-  --workflow PATH                 Path to a Napari Workflow file, in YAML
-                                  format. If provided, the configured
-                                  desekewing processing will be added to the
-                                  chosen workflow.
-  --json-config PATH              Path to a JSON file from which parameters
-                                  will be read.
-  --yaml-config PATH              Path to a YAML file from which parameters
-                                  will be read.
-  --show-schema / --no-show-schema
-                                  If provided, image processing will not be
-                                  performed, and instead a JSON document
-                                  outlining the JSON/YAML options will be
-                                  printed to stdout. This can be used to
-                                  assist with writing a config file for use
-                                  with the --json-config and --yaml-config
-                                  options.  [default: no-show-schema]
-  --help                          Show this message and exit.
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  [INPUT_IMAGE]                   Path to the image file to read, in a format
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                  readable by AICSImageIO, for example .tiff
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                                  or .czi
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  --skew [X|Y]                    Axis along which to deskew the image.
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                                  Choices: `{&quot;X&quot;, &quot;Y&quot;}`. These can be provided
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                  as `str`.   [default: Y]
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  --angle FLOAT                   Angle of deskewing, in degrees, as a float.
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                                  [default: 30.0]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  --pixel-sizes &lt;FLOAT FLOAT FLOAT&gt;...
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>                                  Pixel size of the microscope, in microns.
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                                  This can alternatively be provided as a
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                                  `tuple[float]` of `(Z, Y, X)` This takes
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                                  three arguments, corresponding to the Z, Y
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>                                  and X pixel dimensions respectively
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                                  [default: 0.3, 0.1499219272808386,
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                                  0.1499219272808386]
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>  --rois PATH                     A list of paths pointing to regions of
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                                  interest to crop to, in ImageJ format.
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>  --roi-indices INTEGER           A subset of all the ROIs to process. Each
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>                                  list item should be an index into the ROI
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                                  list indicating an ROI to include. This
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                                  allows you to process only a subset of the
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                                  regions from a ROI file specified using the
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>                                  `roi_list` parameter. If `None`, it is
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                                  assumed that you want to process all ROIs.
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>  --z-start INTEGER               The index of the first Z slice to use. All
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>                                  prior Z slices will be discarded.
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>  --z-end INTEGER                 The index of the last Z slice to use. The
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                                  selected index and all subsequent Z slices
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>                                  will be discarded. Defaults to the last z
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>                                  index of the image.
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>  --deconvolution / --disable-deconvolution
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>                                  [default: disable-deconvolution]
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>  --decon-processing [cuda_gpu|opencl_gpu|cpu]
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>                                  Hardware to use to perform the
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>                                  deconvolution. Choices: `{&quot;cuda_gpu&quot;,
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>                                  &quot;opencl_gpu&quot;, &quot;cpu&quot;}`. Can be provided as
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>                                  `str`.   [default: cpu]
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>  --psf PATH                      One or more paths pointing to point spread
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>                                  functions to use for deconvolution. Each
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                                  file should in a standard image format
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>                                  (.czi, .tiff etc), containing a 3D image
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>                                  array. This option can be used multiple
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>                                  times to provide multiple PSF files.
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>  --psf-num-iter INTEGER          Number of iterations to perform in
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>                                  deconvolution   [default: 10]
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>  --background TEXT               Background value to subtract for
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>                                  deconvolution. Only used when
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>                                  `decon_processing` is set to `GPU`. This can
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>                                  either be a literal number, &quot;auto&quot; which
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>                                  uses the median of the last slice, or
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>                                  &quot;second_last&quot; which uses the median of the
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>                                  last slice.   [default: 0]
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>  --time-start INTEGER            Index of the first time slice to use
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>                                  (inclusive). Defaults to the first time
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>                                  index of the image.  [default: 0]
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>  --time-end INTEGER              Index of the first time slice to use
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>                                  (exclusive). Defaults to the last time index
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>                                  of the image.
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>  --channel-start INTEGER         Index of the first channel slice to use
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>                                  (inclusive). Defaults to the first channel
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>                                  index of the image.  [default: 0]
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>  --channel-end INTEGER           Index of the first channel slice to use
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>                                  (exclusive). Defaults to the last channel
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>                                  index of the image.
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>  --save-dir PATH                 The directory where the output data will be
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>                                  saved. This can be specified as a `str` or
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>                                  `Path`.
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>  --save-name TEXT                The filename that will be used for output
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>                                  files. This should not contain a leading
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>                                  directory or file extension. The final
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>                                  output files will have additional elements
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>                                  added to the end of this prefix to indicate
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>                                  the region of interest, channel, timepoint,
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>                                  file extension etc.
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>  --save-type [h5|tiff]           The data type to save the result as. This
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>                                  will also be used to determine the file
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>                                  extension of the output files. Choices:
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>                                  `{&quot;h5&quot;, &quot;tiff&quot;}`. Choices can alternatively
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>                                  be specifed as `str`, for example `&#39;tiff&#39;`.
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>                                  [default: h5]
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>  --workflow PATH                 Path to a Napari Workflow file, in YAML
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>                                  format. If provided, the configured
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>                                  desekewing processing will be added to the
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>                                  chosen workflow.
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>  --json-config PATH              Path to a JSON file from which parameters
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>                                  will be read.
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>  --yaml-config PATH              Path to a YAML file from which parameters
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>                                  will be read.
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>  --show-schema / --no-show-schema
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>                                  If provided, image processing will not be
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>                                  performed, and instead a JSON document
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>                                  outlining the JSON/YAML options will be
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>                                  printed to stdout. This can be used to
+<a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>                                  assist with writing a config file for use
+<a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>                                  with the --json-config and --yaml-config
+<a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>                                  options.  [default: no-show-schema]
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>  --help                          Show this message and exit.
+</code></pre></div>
 
 
 

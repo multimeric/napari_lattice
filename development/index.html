@@ -362,17 +362,53 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#dev-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dev Workflows
+    </span>
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#adding-a-new-parameter" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a new parameter
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-image-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a new image reader
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-image-writer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a new image writer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lls_core.writers.Writer.write_slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_slice
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -414,6 +450,26 @@
   
   <span class="md-ellipsis">
     Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
   </span>
   
 
@@ -512,17 +568,53 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#dev-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dev Workflows
+    </span>
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#adding-a-new-parameter" class="md-nav__link">
     <span class="md-ellipsis">
       Adding a new parameter
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-image-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a new image reader
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-image-writer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a new image writer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lls_core.writers.Writer.write_slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_slice
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -569,9 +661,9 @@ Within each directory is:</p>
 <li><code>tests/</code>, which contains the tests</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<p>For local development, first clone the repo and then run the following from the repository root:</p>
-<pre><code class="language-bash">pip install -e core -e plugin
-</code></pre>
+<p>For local development, first clone the repo and then run the following from the repository root:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>core<span class="w"> </span>-e<span class="w"> </span>plugin
+</code></pre></div></p>
 <h2 id="technologies">Technologies</h2>
 <h3 id="pydantic">Pydantic</h3>
 <p>Used for defining the parameter sets, performing parameter validation and conversion. These models live in <code>core/lls_core/models</code>.
@@ -585,7 +677,8 @@ Refer to: <a href="https://xarray.pydata.org/.">https://xarray.pydata.org/.</a><
 <h3 id="magicgui-and-magicclass">magicgui and magicclass</h3>
 <p>These packages are used to define the GUI, which you can find in <code>plugin/napari_lattice</code>.
 <a href="https://hanjinliu.github.io/magic-class/"><code>magicclass</code></a> builds on <a href="https://pyapp-kit.github.io/magicgui/"><code>magicgui</code></a> by providing the <code>@magicclass</code> decorator which turns a Python class into a GUI.</p>
-<h2 id="adding-a-new-parameter">Adding a new parameter</h2>
+<h3 id="dev-workflows">Dev Workflows</h3>
+<h3 id="adding-a-new-parameter">Adding a new parameter</h3>
 <p>Whenever a new parameter is added, the following components need to be updated:</p>
 <ul>
 <li>Add the parameter to the Pydantic models</li>
@@ -594,6 +687,43 @@ Refer to: <a href="https://xarray.pydata.org/.">https://xarray.pydata.org/.</a><
 <li>Define the new processing logic in <code>core/lls_core/models/lattice_data.py</code></li>
 </ul>
 <p>An example of this can be found in this commit: <a href="https://github.com/BioimageAnalysisCoreWEHI/napari_lattice/pull/47/commits/16b28fec307f19e73b8d55e677621082037b2710">https://github.com/BioimageAnalysisCoreWEHI/napari_lattice/pull/47/commits/16b28fec307f19e73b8d55e677621082037b2710</a>.</p>
+<h3 id="adding-a-new-image-reader">Adding a new image reader</h3>
+<p>Currently there aren't image reader classes. Instead, we currently have a pydantic validator that converts the image from a path to an array, or from an array into an xarray. A new format could be implemented in this validator: <a href="https://github.com/BioimageAnalysisCoreWEHI/napari_lattice/blob/b33cc4ca5fe0fb89d730cefdbe3169f984f1fe89/core/lls_core/models/deskew.py#L176-L202">https://github.com/BioimageAnalysisCoreWEHI/napari_lattice/blob/b33cc4ca5fe0fb89d730cefdbe3169f984f1fe89/core/lls_core/models/deskew.py#L176-L202</a></p>
+<h3 id="adding-a-new-image-writer">Adding a new image writer</h3>
+<ol>
+<li>
+<p>Create a new writer which inherits from the <code>lls_core.writers.Writer</code> class, and implements its <code>write_slice</code> method:</p>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="lls_core.writers.Writer.write_slice" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">lls_core.writers.Writer.write_slice</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">write_slice</span><span class="p">(</span><span class="nb">slice</span><span class="p">:</span> <span class="n"><span title="lls_core.models.results.ProcessedSlice">ProcessedSlice</span></span><span class="p">[</span><span class="n"><span title="lls_core.types.ArrayLike">ArrayLike</span></span><span class="p">])</span>
+</code></pre></div>
+
+    <div class="doc doc-contents first">
+
+      <p>Writes a 3D image slice</p>
+
+    </div>
+
+</div></li>
+<li>
+<p><a href="https://github.com/multimeric/napari_lattice/blob/b33cc4ca5fe0fb89d730cefdbe3169f984f1fe89/core/lls_core/models/output.py#L11-L16">Add a new option to the <code>SaveFileType</code> enum</a></p>
+</li>
+<li>
+<p><a href="https://github.com/BioimageAnalysisCoreWEHI/napari_lattice/blob/b33cc4ca5fe0fb89d730cefdbe3169f984f1fe89/core/lls_core/models/lattice_data.py#L474-L480">Then, return the correct writer class based on the enum value</a>.</p>
+</li>
+</ol>
 <h2 id="testing">Testing</h2>
 <p>The tests are run using <a href="https://docs.pytest.org/en/7.4.x/">pytest</a>.
 To install the testing dependencies, use <code>pip install -e 'core[testing]' -e 'plugin[testing]'</code>
@@ -602,12 +732,12 @@ To run all the tests, use <code>pytest core/tests/ plugin/tests</code> from the 
 <h2 id="documentation">Documentation</h2>
 <p>Docs are built with <a href="https://www.mkdocs.org/">mkdocs</a>.</p>
 <p>To modify the docs, you need the docs dependencies, so clone the repo and then:</p>
-<pre><code class="language-bash">pip install -e 'core[docs]'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;core[docs]&#39;</span>
+</code></pre></div>
 <p>The key files are:</p>
-<pre><code>* `mkdocs.yml`, which is the main config file for mkdocs, and
+<div class="highlight"><pre><span></span><code>* `mkdocs.yml`, which is the main config file for mkdocs, and
 * `docs/` which is a directory containing markdown files. Each new file that gets added there will create a new page in the website.
-</code></pre>
+</code></pre></div>
 <p>Some useful <code>mkdocs</code> commands:</p>
 <ul>
 <li><code>mkdocs serve</code> runs the development server which hosts the docs on a local web server. Any changes to your markdown files will be reflected in this server, although you sometimes have to restart the server if you make a change to configuration</li>

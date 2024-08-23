@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../development/">
+        <link rel="prev" href="../installation/">
       
-      
-        <link rel="next" href="../workflow/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Installation - Napari Lattice</title>
+        <title>Workflows - Napari Lattice</title>
       
     
     
@@ -64,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#workflows" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              Workflows
             
           </span>
         </div>
@@ -270,6 +268,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -286,7 +304,7 @@
           
   
   <span class="md-ellipsis">
-    Installation
+    Workflows
   </span>
   
 
@@ -297,7 +315,7 @@
         
   
   <span class="md-ellipsis">
-    Installation
+    Workflows
   </span>
   
 
@@ -319,18 +337,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cuda-deconvolution" class="md-nav__link">
+  <a href="#building-a-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      CUDA Deconvolution
+      Building a Workflow
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-versions" class="md-nav__link">
+  <a href="#running-a-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Development Versions
+      Running a Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
     </span>
   </a>
   
@@ -340,26 +367,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../workflow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Workflows
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -391,18 +398,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cuda-deconvolution" class="md-nav__link">
+  <a href="#building-a-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      CUDA Deconvolution
+      Building a Workflow
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-versions" class="md-nav__link">
+  <a href="#running-a-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Development Versions
+      Running a Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
     </span>
   </a>
   
@@ -423,30 +439,41 @@
                   
 
 
-<h1 id="installation">Installation</h1>
-<p>It is advisable but not required that you install Napari Lattice packages inside a conda environment.
-This is because conda makes it much easier to install system complex dependencies.</p>
-<p>To install the core package, which includes the Python library and command line interface:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>lls-core
+<h1 id="workflows">Workflows</h1>
+<p><code>lls_core</code> supports integration with <a href="https://github.com/haesleinhuepf/napari-workflows"><code>napari-workflows</code></a>.
+The advantage of this is that you can design a multi-step automated workflow that uses <code>lls_core</code> as the pre-processing step.</p>
+<h2 id="building-a-workflow">Building a Workflow</h2>
+<p>You can design your workflow via GUI using <a href="https://github.com/haesleinhuepf/napari-assistant">`napari-assistant</a>, or in the YAML format.</p>
+<p>When building your workflow with Napari Assistant, you are actually building a <em>template</em> that will be applied to future images.
+For this reason, you need to rename your input layer to <code>deskewed_image</code>, since this is the exact value that the <code>lls_core</code> step produces.</p>
+<p>If you want to use YAML, you also have to make sure that the first workflow step to run takes <code>deskewed_image</code> as an input.
+For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">!!python/object:napari_workflows._workflow.Workflow</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">_tasks</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">median</span><span class="p">:</span><span class="w"> </span><span class="kt">!!python/tuple</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="kt">!!python/name:pyclesperanto_prototype.median_sphere</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deskewed_image</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 </code></pre></div>
-<p>To install the Napari plugin:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>napari-lattice
-</code></pre></div>
-<h2 id="cuda-deconvolution">CUDA Deconvolution</h2>
-<p>If you have access to a CUDA-compatible GPU, you can enable deconvolution using <code>pycudadecon</code>.</p>
-<p>If you're using conda (or micromamba etc), you can run the following:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>pycudadecon
-</code></pre></div>
-<p>Otherwise, you will have to manually ensure the systems dependencies are installed, and then:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>lls-core<span class="o">[</span>deconvolution<span class="o">]</span>
-</code></pre></div>
-<h2 id="development-versions">Development Versions</h2>
-<p>To install the development version of <code>lls-core</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/BioimageAnalysisCoreWEHI/napari_lattice.git#subdirectory<span class="o">=</span>core
-</code></pre></div>
-<p>For <code>napari-lattice</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/BioimageAnalysisCoreWEHI/napari_lattice.git#subdirectory<span class="o">=</span>plugin
-</code></pre></div>
+<p>Workflows are run once for each 3D slice of the image. In other words, the workflow is run separately for each timepoint, for each channel, for each region of interest (if cropping is enabled).
+This means that you should design your workflow expecting that <code>deskewed_image</code> is an exactly 3D array.</p>
+<p>If you want to define your own custom functions, you can do so in a <code>.py</code> file in the same directory as the workflow <code>.yml</code> file. 
+These will be imported before the workflow is executed.</p>
+<h2 id="running-a-workflow">Running a Workflow</h2>
+<p>The <code>--workflow</code> command-line flag, the <code>LatticeData(workflow=)</code> Python parameter, and the Workflow tab of the plugin can be used to specify the path to a workflow <code>.yml</code> file .</p>
+<p>If you're using the Python interface, you need to use <a href="api/#lls_core.LatticeData.process_workflow"><code>LatticeData.process_workflow()</code></a> rather than <code>.process()</code>. </p>
+<h2 id="outputs">Outputs</h2>
+<p><code>lls_core</code> supports workflows that have exactly one "leaf" task. This is defined as a task that is not used by any other tasks. In other works, it's the final task of the workflow.</p>
+<p>If you want multiple return values, this task can return a tuple of values. Each of these values must be:</p>
+<ul>
+<li>An array, in which case it is treated as an image slice</li>
+<li>A <code>dict</code>, in which case it is treated as a single row of a data frame whose columns are the keys of the <code>dict</code></li>
+<li>A <code>list</code>, in which case it is treated as a single row of a data frame whose columns are unnamed</li>
+</ul>
+<p>Then, each slice is combined at the end. Image slices are stacked together into their original dimensionality, and data frame rows are stacked into a data frame with one row per channel, timepoint and ROI.</p>
 
 
 
